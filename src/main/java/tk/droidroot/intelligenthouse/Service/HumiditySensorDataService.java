@@ -1,12 +1,16 @@
 package tk.droidroot.intelligenthouse.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import tk.droidroot.intelligenthouse.DTO.HumiditySensorDataDTO;
 import tk.droidroot.intelligenthouse.Models.HumiditySensorDataEntity;
 import tk.droidroot.intelligenthouse.Repositories.HumiditySensorDataRepository;
 
 import javax.persistence.EntityNotFoundException;
 
+@Transactional
+@Service
 public class HumiditySensorDataService {
 
     @Autowired
@@ -14,11 +18,12 @@ public class HumiditySensorDataService {
 
     public HumiditySensorDataDTO findById(Long id) {
         try {
-            HumiditySensorDataEntity HumiditySensorData = repository.getOne(id);
+            HumiditySensorDataEntity humiditySensorData = repository.getOne(id);
             HumiditySensorDataDTO dto = new HumiditySensorDataDTO();
-            dto.setId(HumiditySensorData.getId());
-            dto.setData(HumiditySensorData.getData());
-            dto.setDate(HumiditySensorData.getDate());
+            dto.setId(humiditySensorData.getId());
+            dto.setHumiditySensor(humiditySensorData.getHumiditySensor());
+            dto.setData(humiditySensorData.getData());
+            dto.setDate(humiditySensorData.getDate());
 
             return dto;
         }
@@ -29,27 +34,29 @@ public class HumiditySensorDataService {
         return null;
     }
 
-    public HumiditySensorDataEntity create(HumiditySensorDataDTO HumiditySensorDataDTO){
-        HumiditySensorDataEntity HumiditySensorDataEntity = new HumiditySensorDataEntity();
-        HumiditySensorDataEntity.setData(HumiditySensorDataDTO.getData());
-        HumiditySensorDataEntity.setDate(HumiditySensorDataDTO.getDate());
+    public HumiditySensorDataEntity create(HumiditySensorDataDTO humiditySensorDataDTO){
+        HumiditySensorDataEntity humiditySensorDataEntity = new HumiditySensorDataEntity();
+        humiditySensorDataEntity.setHumiditySensor(humiditySensorDataDTO.getHumiditySensor());
+        humiditySensorDataEntity.setData(humiditySensorDataDTO.getData());
+        humiditySensorDataEntity.setDate(humiditySensorDataDTO.getDate());
 
-        return repository.save(HumiditySensorDataEntity);
+        return repository.save(humiditySensorDataEntity);
     }
 
-    public HumiditySensorDataEntity update(HumiditySensorDataDTO HumiditySensorDataDTO, Long id){
-        return repository.findById(id).map(HumiditySensorDataEntity -> {
-            HumiditySensorDataEntity.setData(HumiditySensorDataDTO.getData());
-            HumiditySensorDataEntity.setDate(HumiditySensorDataDTO.getDate());
+    public HumiditySensorDataEntity update(HumiditySensorDataDTO humiditySensorDataDTO, Long id){
+        return repository.findById(id).map(humiditySensorDataEntity -> {
+            humiditySensorDataEntity.setHumiditySensor(humiditySensorDataDTO.getHumiditySensor());
+            humiditySensorDataEntity.setData(humiditySensorDataDTO.getData());
+            humiditySensorDataEntity.setDate(humiditySensorDataDTO.getDate());
 
-            return repository.save(HumiditySensorDataEntity);
+            return repository.save(humiditySensorDataEntity);
         }).orElseGet(() -> {
-            HumiditySensorDataEntity HumiditySensorDataEntity = new HumiditySensorDataEntity();
-            HumiditySensorDataEntity.setId(id);
-            HumiditySensorDataEntity.setData(HumiditySensorDataDTO.getData());
-            HumiditySensorDataEntity.setDate(HumiditySensorDataDTO.getDate());
+            HumiditySensorDataEntity humiditySensorDataEntity = new HumiditySensorDataEntity();
+            humiditySensorDataEntity.setId(id);
+            humiditySensorDataEntity.setData(humiditySensorDataDTO.getData());
+            humiditySensorDataEntity.setDate(humiditySensorDataDTO.getDate());
 
-            return repository.save(HumiditySensorDataEntity);
+            return repository.save(humiditySensorDataEntity);
         });
     }
 

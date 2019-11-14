@@ -1,10 +1,12 @@
 package tk.droidroot.intelligenthouse.DTO;
 
+import tk.droidroot.intelligenthouse.Models.LightSensorEntity;
 import java.util.Objects;
 
 public class LightSensorDataDTO {
 
     private Long id;
+    private LightSensorEntity lightSensor;
     private Double data;
     private String date;
 
@@ -14,10 +16,12 @@ public class LightSensorDataDTO {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        LightSensorDataDTO LightSensorDataDTO = (LightSensorDataDTO) o;
+        LightSensorDataDTO lightSensorDataDTO = (LightSensorDataDTO) o;
 
-        return Objects.equals(id, LightSensorDataDTO.id)
-                && Objects.equals(data, LightSensorDataDTO.data) && Objects.equals(date, LightSensorDataDTO.date);
+        return Objects.equals(id, lightSensorDataDTO.id) &&
+                Objects.equals(lightSensor, lightSensorDataDTO.lightSensor) &&
+                Objects.equals(data, lightSensorDataDTO.data) &&
+                Objects.equals(date, lightSensorDataDTO.date);
     }
 
     @Override
@@ -31,6 +35,14 @@ public class LightSensorDataDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public LightSensorEntity getLightSensor() {
+        return lightSensor;
+    }
+
+    public void setLightSensor(LightSensorEntity lightSensor) {
+        this.lightSensor = lightSensor;
     }
 
     public Double getData() {

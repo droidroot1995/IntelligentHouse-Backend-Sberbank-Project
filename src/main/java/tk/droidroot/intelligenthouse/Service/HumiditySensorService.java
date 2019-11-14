@@ -1,12 +1,16 @@
 package tk.droidroot.intelligenthouse.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import tk.droidroot.intelligenthouse.DTO.HumiditySensorDTO;
 import tk.droidroot.intelligenthouse.Models.HumiditySensorEntity;
 import tk.droidroot.intelligenthouse.Repositories.HumiditySensorRepository;
 
 import javax.persistence.EntityNotFoundException;
 
+@Transactional
+@Service
 public class HumiditySensorService {
 
     @Autowired

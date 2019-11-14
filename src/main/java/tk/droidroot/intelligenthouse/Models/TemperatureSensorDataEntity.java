@@ -30,11 +30,11 @@ public class TemperatureSensorDataEntity {
         this.id = id;
     }
 
-    public TemperatureSensorEntity gettemperatureSensor() {
+    public TemperatureSensorEntity getTemperatureSensor() {
         return temperatureSensor;
     }
 
-    public void settemperatureSensor(TemperatureSensorEntity temperatureSensor) {
+    public void setTemperatureSensor(TemperatureSensorEntity temperatureSensor) {
         this.temperatureSensor = temperatureSensor;
     }
 

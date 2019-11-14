@@ -1,12 +1,16 @@
 package tk.droidroot.intelligenthouse.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import tk.droidroot.intelligenthouse.DTO.GasSensorDataDTO;
 import tk.droidroot.intelligenthouse.Models.GasSensorDataEntity;
 import tk.droidroot.intelligenthouse.Repositories.GasSensorDataRepository;
 
 import javax.persistence.EntityNotFoundException;
 
+@Transactional
+@Service
 public class GasSensorDataService {
 
     @Autowired
@@ -14,11 +18,12 @@ public class GasSensorDataService {
 
     public GasSensorDataDTO findById(Long id) {
         try {
-            GasSensorDataEntity GasSensorData = repository.getOne(id);
+            GasSensorDataEntity gasSensorData = repository.getOne(id);
             GasSensorDataDTO dto = new GasSensorDataDTO();
-            dto.setId(GasSensorData.getId());
-            dto.setData(GasSensorData.getData());
-            dto.setDate(GasSensorData.getDate());
+            dto.setId(gasSensorData.getId());
+            dto.setGasSensor(gasSensorData.getGasSensor());
+            dto.setData(gasSensorData.getData());
+            dto.setDate(gasSensorData.getDate());
 
             return dto;
         }
@@ -29,27 +34,30 @@ public class GasSensorDataService {
         return null;
     }
 
-    public GasSensorDataEntity create(GasSensorDataDTO GasSensorDataDTO){
-        GasSensorDataEntity GasSensorDataEntity = new GasSensorDataEntity();
-        GasSensorDataEntity.setData(GasSensorDataDTO.getData());
-        GasSensorDataEntity.setDate(GasSensorDataDTO.getDate());
+    public GasSensorDataEntity create(GasSensorDataDTO gasSensorDataDTO){
+        GasSensorDataEntity gasSensorDataEntity = new GasSensorDataEntity();
+        gasSensorDataEntity.setGasSensor(gasSensorDataDTO.getGasSensor());
+        gasSensorDataEntity.setData(gasSensorDataDTO.getData());
+        gasSensorDataEntity.setDate(gasSensorDataDTO.getDate());
 
-        return repository.save(GasSensorDataEntity);
+        return repository.save(gasSensorDataEntity);
     }
 
-    public GasSensorDataEntity update(GasSensorDataDTO GasSensorDataDTO, Long id){
-        return repository.findById(id).map(GasSensorDataEntity -> {
-            GasSensorDataEntity.setData(GasSensorDataDTO.getData());
-            GasSensorDataEntity.setDate(GasSensorDataDTO.getDate());
+    public GasSensorDataEntity update(GasSensorDataDTO gasSensorDataDTO, Long id){
+        return repository.findById(id).map(gasSensorDataEntity -> {
+            gasSensorDataEntity.setGasSensor(gasSensorDataDTO.getGasSensor());
+            gasSensorDataEntity.setData(gasSensorDataDTO.getData());
+            gasSensorDataEntity.setDate(gasSensorDataDTO.getDate());
 
-            return repository.save(GasSensorDataEntity);
+            return repository.save(gasSensorDataEntity);
         }).orElseGet(() -> {
-            GasSensorDataEntity GasSensorDataEntity = new GasSensorDataEntity();
-            GasSensorDataEntity.setId(id);
-            GasSensorDataEntity.setData(GasSensorDataDTO.getData());
-            GasSensorDataEntity.setDate(GasSensorDataDTO.getDate());
+            GasSensorDataEntity gasSensorDataEntity = new GasSensorDataEntity();
+            gasSensorDataEntity.setId(id);
+            gasSensorDataEntity.setGasSensor(gasSensorDataDTO.getGasSensor());
+            gasSensorDataEntity.setData(gasSensorDataDTO.getData());
+            gasSensorDataEntity.setDate(gasSensorDataDTO.getDate());
 
-            return repository.save(GasSensorDataEntity);
+            return repository.save(gasSensorDataEntity);
         });
     }
 

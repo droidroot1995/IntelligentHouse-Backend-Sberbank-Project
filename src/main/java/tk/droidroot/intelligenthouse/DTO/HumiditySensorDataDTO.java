@@ -1,10 +1,13 @@
 package tk.droidroot.intelligenthouse.DTO;
 
+import tk.droidroot.intelligenthouse.Models.HumiditySensorEntity;
+
 import java.util.Objects;
 
 public class HumiditySensorDataDTO {
 
     private Long id;
+    private HumiditySensorEntity humiditySensor;
     private Double data;
     private String date;
 
@@ -14,10 +17,12 @@ public class HumiditySensorDataDTO {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        HumiditySensorDataDTO HumiditySensorDataDTO = (HumiditySensorDataDTO) o;
+        HumiditySensorDataDTO humiditySensorDataDTO = (HumiditySensorDataDTO) o;
 
-        return Objects.equals(id, HumiditySensorDataDTO.id)
-                && Objects.equals(data, HumiditySensorDataDTO.data) && Objects.equals(date, HumiditySensorDataDTO.date);
+        return Objects.equals(id, humiditySensorDataDTO.id) &&
+                Objects.equals(humiditySensor, humiditySensorDataDTO.humiditySensor) &&
+                Objects.equals(data, humiditySensorDataDTO.data) &&
+                Objects.equals(date, humiditySensorDataDTO.date);
     }
 
     @Override
@@ -31,6 +36,14 @@ public class HumiditySensorDataDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public HumiditySensorEntity getHumiditySensor() {
+        return humiditySensor;
+    }
+
+    public void setHumiditySensor(HumiditySensorEntity humiditySensor) {
+        this.humiditySensor = humiditySensor;
     }
 
     public Double getData() {

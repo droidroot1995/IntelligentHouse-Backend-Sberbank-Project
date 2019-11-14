@@ -13,9 +13,9 @@ public class TemperatureSensorDTO {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        TemperatureSensorDTO TemperatureSensorDTO = (TemperatureSensorDTO) o;
+        TemperatureSensorDTO temperatureSensorDTO = (TemperatureSensorDTO) o;
 
-        return Objects.equals(id, TemperatureSensorDTO.id) && Objects.equals(name, TemperatureSensorDTO.name);
+        return Objects.equals(id, temperatureSensorDTO.id) && Objects.equals(name, temperatureSensorDTO.name);
     }
 
     @Override

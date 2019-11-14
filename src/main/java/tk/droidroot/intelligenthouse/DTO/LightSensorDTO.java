@@ -13,9 +13,9 @@ public class LightSensorDTO {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        LightSensorDTO LightSensorDTO = (LightSensorDTO) o;
+        LightSensorDTO lightSensorDTO = (LightSensorDTO) o;
 
-        return Objects.equals(id, LightSensorDTO.id) && Objects.equals(name, LightSensorDTO.name);
+        return Objects.equals(id, lightSensorDTO.id) && Objects.equals(name, lightSensorDTO.name);
     }
 
     @Override

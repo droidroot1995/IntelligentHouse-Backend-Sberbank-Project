@@ -30,11 +30,11 @@ public class LightSensorDataEntity {
         this.id = id;
     }
 
-    public LightSensorEntity getlightSensor() {
+    public LightSensorEntity getLightSensor() {
         return lightSensor;
     }
 
-    public void setlightSensor(LightSensorEntity lightSensor) {
+    public void setLightSensor(LightSensorEntity lightSensor) {
         this.lightSensor = lightSensor;
     }
 

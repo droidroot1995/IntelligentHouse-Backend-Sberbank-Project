@@ -13,9 +13,9 @@ public class GasSensorDTO {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        GasSensorDTO GasSensorDTO = (GasSensorDTO) o;
+        GasSensorDTO gasSensorDTO = (GasSensorDTO) o;
 
-        return Objects.equals(id, GasSensorDTO.id) && Objects.equals(name, GasSensorDTO.name);
+        return Objects.equals(id, gasSensorDTO.id) && Objects.equals(name, gasSensorDTO.name);
     }
 
     @Override

@@ -1,12 +1,16 @@
 package tk.droidroot.intelligenthouse.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import tk.droidroot.intelligenthouse.DTO.LightSensorDTO;
 import tk.droidroot.intelligenthouse.Models.LightSensorEntity;
 import tk.droidroot.intelligenthouse.Repositories.LightSensorRepository;
 
 import javax.persistence.EntityNotFoundException;
 
+@Transactional
+@Service
 public class LightSensorService {
 
     @Autowired

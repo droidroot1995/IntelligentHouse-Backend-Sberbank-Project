@@ -1,12 +1,16 @@
 package tk.droidroot.intelligenthouse.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import tk.droidroot.intelligenthouse.DTO.TemperatureSensorDataDTO;
 import tk.droidroot.intelligenthouse.Models.TemperatureSensorDataEntity;
 import tk.droidroot.intelligenthouse.Repositories.TemperatureSensorDataRepository;
 
 import javax.persistence.EntityNotFoundException;
 
+@Transactional
+@Service
 public class TemperatureSensorDataService {
 
     @Autowired
@@ -14,11 +18,12 @@ public class TemperatureSensorDataService {
 
     public TemperatureSensorDataDTO findById(Long id) {
         try {
-            TemperatureSensorDataEntity TemperatureSensorData = repository.getOne(id);
+            TemperatureSensorDataEntity temperatureSensorData = repository.getOne(id);
             TemperatureSensorDataDTO dto = new TemperatureSensorDataDTO();
-            dto.setId(TemperatureSensorData.getId());
-            dto.setData(TemperatureSensorData.getData());
-            dto.setDate(TemperatureSensorData.getDate());
+            dto.setId(temperatureSensorData.getId());
+            dto.setTemperatureSensor(temperatureSensorData.getTemperatureSensor());
+            dto.setData(temperatureSensorData.getData());
+            dto.setDate(temperatureSensorData.getDate());
 
             return dto;
         }
@@ -29,27 +34,29 @@ public class TemperatureSensorDataService {
         return null;
     }
 
-    public TemperatureSensorDataEntity create(TemperatureSensorDataDTO TemperatureSensorDataDTO){
-        TemperatureSensorDataEntity TemperatureSensorDataEntity = new TemperatureSensorDataEntity();
-        TemperatureSensorDataEntity.setData(TemperatureSensorDataDTO.getData());
-        TemperatureSensorDataEntity.setDate(TemperatureSensorDataDTO.getDate());
+    public TemperatureSensorDataEntity create(TemperatureSensorDataDTO temperatureSensorDataDTO){
+        TemperatureSensorDataEntity temperatureSensorDataEntity = new TemperatureSensorDataEntity();
+        temperatureSensorDataEntity.setData(temperatureSensorDataDTO.getData());
+        temperatureSensorDataEntity.setDate(temperatureSensorDataDTO.getDate());
 
-        return repository.save(TemperatureSensorDataEntity);
+        return repository.save(temperatureSensorDataEntity);
     }
 
-    public TemperatureSensorDataEntity update(TemperatureSensorDataDTO TemperatureSensorDataDTO, Long id){
-        return repository.findById(id).map(TemperatureSensorDataEntity -> {
-            TemperatureSensorDataEntity.setData(TemperatureSensorDataDTO.getData());
-            TemperatureSensorDataEntity.setDate(TemperatureSensorDataDTO.getDate());
+    public TemperatureSensorDataEntity update(TemperatureSensorDataDTO temperatureSensorDataDTO, Long id){
+        return repository.findById(id).map(temperatureSensorDataEntity -> {
+            temperatureSensorDataEntity.setTemperatureSensor(temperatureSensorDataDTO.getTemperatureSensor());
+            temperatureSensorDataEntity.setData(temperatureSensorDataDTO.getData());
+            temperatureSensorDataEntity.setDate(temperatureSensorDataDTO.getDate());
 
-            return repository.save(TemperatureSensorDataEntity);
+            return repository.save(temperatureSensorDataEntity);
         }).orElseGet(() -> {
-            TemperatureSensorDataEntity TemperatureSensorDataEntity = new TemperatureSensorDataEntity();
-            TemperatureSensorDataEntity.setId(id);
-            TemperatureSensorDataEntity.setData(TemperatureSensorDataDTO.getData());
-            TemperatureSensorDataEntity.setDate(TemperatureSensorDataDTO.getDate());
+            TemperatureSensorDataEntity temperatureSensorDataEntity = new TemperatureSensorDataEntity();
+            temperatureSensorDataEntity.setId(id);
+            temperatureSensorDataEntity.setTemperatureSensor(temperatureSensorDataDTO.getTemperatureSensor());
+            temperatureSensorDataEntity.setData(temperatureSensorDataDTO.getData());
+            temperatureSensorDataEntity.setDate(temperatureSensorDataDTO.getDate());
 
-            return repository.save(TemperatureSensorDataEntity);
+            return repository.save(temperatureSensorDataEntity);
         });
     }
 

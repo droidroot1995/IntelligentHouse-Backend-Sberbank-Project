@@ -1,10 +1,12 @@
 package tk.droidroot.intelligenthouse.DTO;
 
+import tk.droidroot.intelligenthouse.Models.TemperatureSensorEntity;
 import java.util.Objects;
 
 public class TemperatureSensorDataDTO {
 
     private Long id;
+    private TemperatureSensorEntity temperatureSensor;
     private Double data;
     private String date;
 
@@ -14,10 +16,12 @@ public class TemperatureSensorDataDTO {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        TemperatureSensorDataDTO TemperatureSensorDataDTO = (TemperatureSensorDataDTO) o;
+        TemperatureSensorDataDTO temperatureSensorDataDTO = (TemperatureSensorDataDTO) o;
 
-        return Objects.equals(id, TemperatureSensorDataDTO.id) && Objects.equals(data, TemperatureSensorDataDTO.data)
-                && Objects.equals(date, TemperatureSensorDataDTO.date);
+        return Objects.equals(id, temperatureSensorDataDTO.id) &&
+                Objects.equals(temperatureSensor, temperatureSensorDataDTO.temperatureSensor) &&
+                Objects.equals(data, temperatureSensorDataDTO.data) &&
+                Objects.equals(date, temperatureSensorDataDTO.date);
     }
 
     @Override
@@ -31,6 +35,14 @@ public class TemperatureSensorDataDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public TemperatureSensorEntity getTemperatureSensor() {
+        return temperatureSensor;
+    }
+
+    public void setTemperatureSensor(TemperatureSensorEntity temperatureSensor) {
+        this.temperatureSensor = temperatureSensor;
     }
 
     public Double getData() {

@@ -3,8 +3,7 @@ package tk.droidroot.intelligenthouse.Models;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name="light_sensor")
@@ -18,7 +17,7 @@ public class LightSensorEntity {
     private String name;
 
     @OneToMany(mappedBy = "lightSensor", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private Set<LightSensorDataEntity> sensorData = new HashSet<>();
+    private List<LightSensorDataEntity> sensorData;
 
     public Long getId() {
         return id;
@@ -36,11 +35,11 @@ public class LightSensorEntity {
         this.name = name;
     }
 
-    public Set<LightSensorDataEntity> getSensorData() {
+    public List<LightSensorDataEntity> getSensorData() {
         return sensorData;
     }
 
-    public void setSensorData(Set<LightSensorDataEntity> sensorData) {
+    public void setSensorData(List<LightSensorDataEntity> sensorData) {
         this.sensorData = sensorData;
     }
 }

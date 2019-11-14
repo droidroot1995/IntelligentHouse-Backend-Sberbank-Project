@@ -13,9 +13,9 @@ public class HumiditySensorDTO {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        HumiditySensorDTO HumiditySensorDTO = (HumiditySensorDTO) o;
+        HumiditySensorDTO humiditySensorDTO = (HumiditySensorDTO) o;
 
-        return Objects.equals(id, HumiditySensorDTO.id) && Objects.equals(name, HumiditySensorDTO.name);
+        return Objects.equals(id, humiditySensorDTO.id) && Objects.equals(name, humiditySensorDTO.name);
     }
 
     @Override

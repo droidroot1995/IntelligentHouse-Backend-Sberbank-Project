@@ -1,10 +1,13 @@
 package tk.droidroot.intelligenthouse.DTO;
 
+import tk.droidroot.intelligenthouse.Models.GasSensorEntity;
+
 import java.util.Objects;
 
 public class GasSensorDataDTO {
 
     private Long id;
+    private GasSensorEntity gasSensor;
     private Double data;
     private String date;
 
@@ -14,10 +17,12 @@ public class GasSensorDataDTO {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        GasSensorDataDTO GasSensorDataDTO = (GasSensorDataDTO) o;
+        GasSensorDataDTO gasSensorDataDTO = (GasSensorDataDTO) o;
 
-        return Objects.equals(id, GasSensorDataDTO.id)
-                && Objects.equals(data, GasSensorDataDTO.data) && Objects.equals(date, GasSensorDataDTO.date);
+        return Objects.equals(id, gasSensorDataDTO.id) &&
+                Objects.equals(gasSensor, gasSensorDataDTO.gasSensor) &&
+                Objects.equals(data, gasSensorDataDTO.data) &&
+                Objects.equals(date, gasSensorDataDTO.date);
     }
 
     @Override
@@ -31,6 +36,14 @@ public class GasSensorDataDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public GasSensorEntity getGasSensor() {
+        return gasSensor;
+    }
+
+    public void setGasSensor(GasSensorEntity gasSensor) {
+        this.gasSensor = gasSensor;
     }
 
     public Double getData() {

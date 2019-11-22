@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import tk.droidroot.intelligenthouse.DTO.HumiditySensorDataDTO;
 import tk.droidroot.intelligenthouse.Models.HumiditySensorDataEntity;
 import tk.droidroot.intelligenthouse.Repositories.HumiditySensorDataRepository;
+import tk.droidroot.intelligenthouse.Repositories.HumiditySensorRepository;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -16,12 +17,15 @@ public class HumiditySensorDataService {
     @Autowired
     private HumiditySensorDataRepository repository;
 
+    @Autowired
+    private HumiditySensorRepository sensorRepository;
+
     public HumiditySensorDataDTO findById(Long id) {
         try {
             HumiditySensorDataEntity humiditySensorData = repository.getOne(id);
             HumiditySensorDataDTO dto = new HumiditySensorDataDTO();
             dto.setId(humiditySensorData.getId());
-            dto.setHumiditySensor(humiditySensorData.getHumiditySensor());
+            dto.setHumiditySensor(humiditySensorData.getHumiditySensor().getId());
             dto.setData(humiditySensorData.getData());
             dto.setDate(humiditySensorData.getDate());
 
@@ -36,7 +40,7 @@ public class HumiditySensorDataService {
 
     public HumiditySensorDataEntity create(HumiditySensorDataDTO humiditySensorDataDTO){
         HumiditySensorDataEntity humiditySensorDataEntity = new HumiditySensorDataEntity();
-        humiditySensorDataEntity.setHumiditySensor(humiditySensorDataDTO.getHumiditySensor());
+        humiditySensorDataEntity.setHumiditySensor(sensorRepository.getOne(humiditySensorDataDTO.getHumiditySensor()));
         humiditySensorDataEntity.setData(humiditySensorDataDTO.getData());
         humiditySensorDataEntity.setDate(humiditySensorDataDTO.getDate());
 
@@ -45,7 +49,7 @@ public class HumiditySensorDataService {
 
     public HumiditySensorDataEntity update(HumiditySensorDataDTO humiditySensorDataDTO, Long id){
         return repository.findById(id).map(humiditySensorDataEntity -> {
-            humiditySensorDataEntity.setHumiditySensor(humiditySensorDataDTO.getHumiditySensor());
+            humiditySensorDataEntity.setHumiditySensor(sensorRepository.getOne(humiditySensorDataDTO.getHumiditySensor()));
             humiditySensorDataEntity.setData(humiditySensorDataDTO.getData());
             humiditySensorDataEntity.setDate(humiditySensorDataDTO.getDate());
 

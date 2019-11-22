@@ -18,10 +18,10 @@ public class TemperatureSensorService {
 
     public TemperatureSensorDTO findById(Long id) {
         try {
-            TemperatureSensorEntity TemperatureSensor = repository.getOne(id);
+            TemperatureSensorEntity temperatureSensor = repository.getOne(id);
             TemperatureSensorDTO dto = new TemperatureSensorDTO();
-            dto.setId(TemperatureSensor.getId());
-            dto.setName(TemperatureSensor.getName());
+            dto.setId(temperatureSensor.getId());
+            dto.setName(temperatureSensor.getName());
 
             return dto;
         }
@@ -32,24 +32,24 @@ public class TemperatureSensorService {
         return null;
     }
 
-    public TemperatureSensorEntity create(TemperatureSensorDTO TemperatureSensorDTO){
-        TemperatureSensorEntity TemperatureSensorEntity = new TemperatureSensorEntity();
-        TemperatureSensorEntity.setName(TemperatureSensorDTO.getName());
+    public TemperatureSensorEntity create(TemperatureSensorDTO temperatureSensorDTO){
+        TemperatureSensorEntity temperatureSensorEntity = new TemperatureSensorEntity();
+        temperatureSensorEntity.setName(temperatureSensorDTO.getName());
 
-        return repository.save(TemperatureSensorEntity);
+        return repository.save(temperatureSensorEntity);
     }
 
-    public TemperatureSensorEntity update(TemperatureSensorDTO TemperatureSensorDTO, Long id){
-        return repository.findById(id).map(TemperatureSensorEntity -> {
-            TemperatureSensorEntity.setName(TemperatureSensorDTO.getName());
+    public TemperatureSensorEntity update(TemperatureSensorDTO temperatureSensorDTO, Long id){
+        return repository.findById(id).map(temperatureSensorEntity -> {
+            temperatureSensorEntity.setName(temperatureSensorDTO.getName());
 
-            return repository.save(TemperatureSensorEntity);
+            return repository.save(temperatureSensorEntity);
         }).orElseGet(() -> {
-            TemperatureSensorEntity TemperatureSensorEntity = new TemperatureSensorEntity();
-            TemperatureSensorEntity.setId(id);
-            TemperatureSensorEntity.setName(TemperatureSensorDTO.getName());
+            TemperatureSensorEntity temperatureSensorEntity = new TemperatureSensorEntity();
+            temperatureSensorEntity.setId(id);
+            temperatureSensorEntity.setName(temperatureSensorDTO.getName());
 
-            return repository.save(TemperatureSensorEntity);
+            return repository.save(temperatureSensorEntity);
         });
     }
 

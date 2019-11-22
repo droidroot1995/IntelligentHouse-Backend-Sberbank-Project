@@ -18,10 +18,10 @@ public class LightSensorService {
 
     public LightSensorDTO findById(Long id) {
         try {
-            LightSensorEntity LightSensor = repository.getOne(id);
+            LightSensorEntity lightSensor = repository.getOne(id);
             LightSensorDTO dto = new LightSensorDTO();
-            dto.setId(LightSensor.getId());
-            dto.setName(LightSensor.getName());
+            dto.setId(lightSensor.getId());
+            dto.setName(lightSensor.getName());
 
             return dto;
         }
@@ -32,24 +32,24 @@ public class LightSensorService {
         return null;
     }
 
-    public LightSensorEntity create(LightSensorDTO LightSensorDTO){
-        LightSensorEntity LightSensorEntity = new LightSensorEntity();
-        LightSensorEntity.setName(LightSensorDTO.getName());
+    public LightSensorEntity create(LightSensorDTO lightSensorDTO){
+        LightSensorEntity lightSensorEntity = new LightSensorEntity();
+        lightSensorEntity.setName(lightSensorDTO.getName());
 
-        return repository.save(LightSensorEntity);
+        return repository.save(lightSensorEntity);
     }
 
-    public LightSensorEntity update(LightSensorDTO LightSensorDTO, Long id){
-        return repository.findById(id).map(LightSensorEntity -> {
-            LightSensorEntity.setName(LightSensorDTO.getName());
+    public LightSensorEntity update(LightSensorDTO lightSensorDTO, Long id){
+        return repository.findById(id).map(lightSensorEntity -> {
+            lightSensorEntity.setName(lightSensorDTO.getName());
 
-            return repository.save(LightSensorEntity);
+            return repository.save(lightSensorEntity);
         }).orElseGet(() -> {
-            LightSensorEntity LightSensorEntity = new LightSensorEntity();
-            LightSensorEntity.setId(id);
-            LightSensorEntity.setName(LightSensorDTO.getName());
+            LightSensorEntity lightSensorEntity = new LightSensorEntity();
+            lightSensorEntity.setId(id);
+            lightSensorEntity.setName(lightSensorDTO.getName());
 
-            return repository.save(LightSensorEntity);
+            return repository.save(lightSensorEntity);
         });
     }
 

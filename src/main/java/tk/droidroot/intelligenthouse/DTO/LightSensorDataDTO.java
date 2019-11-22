@@ -6,7 +6,7 @@ import java.util.Objects;
 public class LightSensorDataDTO {
 
     private Long id;
-    private LightSensorEntity lightSensor;
+    private Long lightSensor;
     private Double data;
     private String date;
 
@@ -36,12 +36,11 @@ public class LightSensorDataDTO {
     public void setId(Long id) {
         this.id = id;
     }
-
-    public LightSensorEntity getLightSensor() {
+    public Long getLightSensor() {
         return lightSensor;
     }
 
-    public void setLightSensor(LightSensorEntity lightSensor) {
+    public void setLightSensor(Long lightSensor) {
         this.lightSensor = lightSensor;
     }
 

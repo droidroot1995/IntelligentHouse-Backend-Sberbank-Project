@@ -18,10 +18,10 @@ public class GasSensorService {
 
     public GasSensorDTO findById(Long id) {
         try {
-            GasSensorEntity GasSensor = repository.getOne(id);
+            GasSensorEntity gasSensor = repository.getOne(id);
             GasSensorDTO dto = new GasSensorDTO();
-            dto.setId(GasSensor.getId());
-            dto.setName(GasSensor.getName());
+            dto.setId(gasSensor.getId());
+            dto.setName(gasSensor.getName());
 
             return dto;
         }
@@ -32,24 +32,24 @@ public class GasSensorService {
         return null;
     }
 
-    public GasSensorEntity create(GasSensorDTO GasSensorDTO){
-        GasSensorEntity GasSensorEntity = new GasSensorEntity();
-        GasSensorEntity.setName(GasSensorDTO.getName());
+    public GasSensorEntity create(GasSensorDTO gasSensorDTO){
+        GasSensorEntity gasSensorEntity = new GasSensorEntity();
+        gasSensorEntity.setName(gasSensorDTO.getName());
 
-        return repository.save(GasSensorEntity);
+        return repository.save(gasSensorEntity);
     }
 
-    public GasSensorEntity update(GasSensorDTO GasSensorDTO, Long id){
-        return repository.findById(id).map(GasSensorEntity -> {
-            GasSensorEntity.setName(GasSensorDTO.getName());
+    public GasSensorEntity update(GasSensorDTO gasSensorDTO, Long id){
+        return repository.findById(id).map(gasSensorEntity -> {
+            gasSensorEntity.setName(gasSensorDTO.getName());
 
-            return repository.save(GasSensorEntity);
+            return repository.save(gasSensorEntity);
         }).orElseGet(() -> {
-            GasSensorEntity GasSensorEntity = new GasSensorEntity();
-            GasSensorEntity.setId(id);
-            GasSensorEntity.setName(GasSensorDTO.getName());
+            GasSensorEntity gasSensorEntity = new GasSensorEntity();
+            gasSensorEntity.setId(id);
+            gasSensorEntity.setName(gasSensorDTO.getName());
 
-            return repository.save(GasSensorEntity);
+            return repository.save(gasSensorEntity);
         });
     }
 

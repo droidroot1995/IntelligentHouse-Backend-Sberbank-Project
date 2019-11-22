@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import tk.droidroot.intelligenthouse.DTO.GasSensorDataDTO;
 import tk.droidroot.intelligenthouse.Models.GasSensorDataEntity;
 import tk.droidroot.intelligenthouse.Repositories.GasSensorDataRepository;
+import tk.droidroot.intelligenthouse.Repositories.GasSensorRepository;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -16,12 +17,15 @@ public class GasSensorDataService {
     @Autowired
     private GasSensorDataRepository repository;
 
+    @Autowired
+    private GasSensorRepository sensorRepository;
+
     public GasSensorDataDTO findById(Long id) {
         try {
             GasSensorDataEntity gasSensorData = repository.getOne(id);
             GasSensorDataDTO dto = new GasSensorDataDTO();
             dto.setId(gasSensorData.getId());
-            dto.setGasSensor(gasSensorData.getGasSensor());
+            dto.setGasSensor(gasSensorData.getGasSensor().getId());
             dto.setData(gasSensorData.getData());
             dto.setDate(gasSensorData.getDate());
 
@@ -36,16 +40,15 @@ public class GasSensorDataService {
 
     public GasSensorDataEntity create(GasSensorDataDTO gasSensorDataDTO){
         GasSensorDataEntity gasSensorDataEntity = new GasSensorDataEntity();
-        gasSensorDataEntity.setGasSensor(gasSensorDataDTO.getGasSensor());
+        gasSensorDataEntity.setGasSensor(sensorRepository.getOne(gasSensorDataDTO.getGasSensor()));
         gasSensorDataEntity.setData(gasSensorDataDTO.getData());
         gasSensorDataEntity.setDate(gasSensorDataDTO.getDate());
-
         return repository.save(gasSensorDataEntity);
     }
 
     public GasSensorDataEntity update(GasSensorDataDTO gasSensorDataDTO, Long id){
         return repository.findById(id).map(gasSensorDataEntity -> {
-            gasSensorDataEntity.setGasSensor(gasSensorDataDTO.getGasSensor());
+            gasSensorDataEntity.setGasSensor(sensorRepository.getOne(gasSensorDataDTO.getGasSensor()));
             gasSensorDataEntity.setData(gasSensorDataDTO.getData());
             gasSensorDataEntity.setDate(gasSensorDataDTO.getDate());
 
@@ -53,7 +56,7 @@ public class GasSensorDataService {
         }).orElseGet(() -> {
             GasSensorDataEntity gasSensorDataEntity = new GasSensorDataEntity();
             gasSensorDataEntity.setId(id);
-            gasSensorDataEntity.setGasSensor(gasSensorDataDTO.getGasSensor());
+            gasSensorDataEntity.setGasSensor(sensorRepository.getOne(gasSensorDataDTO.getGasSensor()));
             gasSensorDataEntity.setData(gasSensorDataDTO.getData());
             gasSensorDataEntity.setDate(gasSensorDataDTO.getDate());
 

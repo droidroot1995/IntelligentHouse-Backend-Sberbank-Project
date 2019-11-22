@@ -6,7 +6,7 @@ import java.util.Objects;
 public class TemperatureSensorDataDTO {
 
     private Long id;
-    private TemperatureSensorEntity temperatureSensor;
+    private Long temperatureSensor;
     private Double data;
     private String date;
 
@@ -37,11 +37,11 @@ public class TemperatureSensorDataDTO {
         this.id = id;
     }
 
-    public TemperatureSensorEntity getTemperatureSensor() {
+    public Long getTemperatureSensor() {
         return temperatureSensor;
     }
 
-    public void setTemperatureSensor(TemperatureSensorEntity temperatureSensor) {
+    public void setTemperatureSensor(Long temperatureSensor) {
         this.temperatureSensor = temperatureSensor;
     }
 

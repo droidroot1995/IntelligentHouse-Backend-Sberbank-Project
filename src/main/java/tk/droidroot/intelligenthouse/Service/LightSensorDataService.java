@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import tk.droidroot.intelligenthouse.DTO.LightSensorDataDTO;
 import tk.droidroot.intelligenthouse.Models.LightSensorDataEntity;
 import tk.droidroot.intelligenthouse.Repositories.LightSensorDataRepository;
+import tk.droidroot.intelligenthouse.Repositories.LightSensorRepository;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -16,12 +17,15 @@ public class LightSensorDataService {
     @Autowired
     private LightSensorDataRepository repository;
 
+    @Autowired
+    private LightSensorRepository sensorRepository;
+
     public LightSensorDataDTO findById(Long id) {
         try {
             LightSensorDataEntity lightSensorData = repository.getOne(id);
             LightSensorDataDTO dto = new LightSensorDataDTO();
             dto.setId(lightSensorData.getId());
-            dto.setLightSensor(lightSensorData.getLightSensor());
+            dto.setLightSensor(lightSensorData.getLightSensor().getId());
             dto.setData(lightSensorData.getData());
             dto.setDate(lightSensorData.getDate());
 
@@ -36,7 +40,7 @@ public class LightSensorDataService {
 
     public LightSensorDataEntity create(LightSensorDataDTO lightSensorDataDTO){
         LightSensorDataEntity lightSensorDataEntity = new LightSensorDataEntity();
-        lightSensorDataEntity.setLightSensor(lightSensorDataDTO.getLightSensor());
+        lightSensorDataEntity.setLightSensor(sensorRepository.getOne(lightSensorDataDTO.getLightSensor()));
         lightSensorDataEntity.setData(lightSensorDataDTO.getData());
         lightSensorDataEntity.setDate(lightSensorDataDTO.getDate());
 
@@ -45,7 +49,7 @@ public class LightSensorDataService {
 
     public LightSensorDataEntity update(LightSensorDataDTO lightSensorDataDTO, Long id){
         return repository.findById(id).map(lightSensorDataEntity -> {
-            lightSensorDataEntity.setLightSensor(lightSensorDataDTO.getLightSensor());
+            lightSensorDataEntity.setLightSensor(sensorRepository.getOne(lightSensorDataDTO.getLightSensor()));
             lightSensorDataEntity.setData(lightSensorDataDTO.getData());
             lightSensorDataEntity.setDate(lightSensorDataDTO.getDate());
 
@@ -53,7 +57,7 @@ public class LightSensorDataService {
         }).orElseGet(() -> {
             LightSensorDataEntity lightSensorDataEntity = new LightSensorDataEntity();
             lightSensorDataEntity.setId(id);
-            lightSensorDataEntity.setLightSensor(lightSensorDataDTO.getLightSensor());
+            lightSensorDataEntity.setLightSensor(sensorRepository.getOne(lightSensorDataDTO.getLightSensor()));
             lightSensorDataEntity.setData(lightSensorDataDTO.getData());
             lightSensorDataEntity.setDate(lightSensorDataDTO.getDate());
 

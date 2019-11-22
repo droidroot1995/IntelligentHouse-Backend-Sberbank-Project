@@ -7,7 +7,7 @@ import java.util.Objects;
 public class HumiditySensorDataDTO {
 
     private Long id;
-    private HumiditySensorEntity humiditySensor;
+    private Long humiditySensor;
     private Double data;
     private String date;
 
@@ -38,11 +38,11 @@ public class HumiditySensorDataDTO {
         this.id = id;
     }
 
-    public HumiditySensorEntity getHumiditySensor() {
+    public Long getHumiditySensor() {
         return humiditySensor;
     }
 
-    public void setHumiditySensor(HumiditySensorEntity humiditySensor) {
+    public void setHumiditySensor(Long humiditySensor) {
         this.humiditySensor = humiditySensor;
     }
 

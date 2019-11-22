@@ -7,7 +7,7 @@ import java.util.Objects;
 public class GasSensorDataDTO {
 
     private Long id;
-    private GasSensorEntity gasSensor;
+    private Long gasSensor;
     private Double data;
     private String date;
 
@@ -38,11 +38,11 @@ public class GasSensorDataDTO {
         this.id = id;
     }
 
-    public GasSensorEntity getGasSensor() {
+    public Long getGasSensor() {
         return gasSensor;
     }
 
-    public void setGasSensor(GasSensorEntity gasSensor) {
+    public void setGasSensor(Long gasSensor) {
         this.gasSensor = gasSensor;
     }
 

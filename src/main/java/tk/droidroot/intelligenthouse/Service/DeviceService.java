@@ -18,11 +18,11 @@ public class DeviceService {
 
     public DeviceDTO findById(Long id) {
         try {
-            DeviceEntity Device = repository.getOne(id);
+            DeviceEntity device = repository.getOne(id);
             DeviceDTO dto = new DeviceDTO();
-            dto.setId(Device.getId());
-            dto.setName(Device.getName());
-            dto.setState(Device.getState());
+            dto.setId(device.getId());
+            dto.setName(device.getName());
+            dto.setState(device.getState());
 
             return dto;
         }
@@ -33,27 +33,27 @@ public class DeviceService {
         return null;
     }
 
-    public DeviceEntity create(DeviceDTO DeviceDTO){
-        DeviceEntity DeviceEntity = new DeviceEntity();
-        DeviceEntity.setName(DeviceDTO.getName());
-        DeviceEntity.setState(DeviceDTO.getState());
+    public DeviceEntity create(DeviceDTO deviceDTO){
+        DeviceEntity deviceEntity = new DeviceEntity();
+        deviceEntity.setName(deviceDTO.getName());
+        deviceEntity.setState(deviceDTO.getState());
 
-        return repository.save(DeviceEntity);
+        return repository.save(deviceEntity);
     }
 
-    public DeviceEntity update(DeviceDTO DeviceDTO, Long id){
-        return repository.findById(id).map(DeviceEntity -> {
-            DeviceEntity.setName(DeviceDTO.getName());
-            DeviceEntity.setState(DeviceDTO.getState());
+    public DeviceEntity update(DeviceDTO deviceDTO, Long id){
+        return repository.findById(id).map(deviceEntity -> {
+            deviceEntity.setName(deviceDTO.getName());
+            deviceEntity.setState(deviceDTO.getState());
 
-            return repository.save(DeviceEntity);
+            return repository.save(deviceEntity);
         }).orElseGet(() -> {
-            DeviceEntity DeviceEntity = new DeviceEntity();
-            DeviceEntity.setId(id);
-            DeviceEntity.setName(DeviceDTO.getName());
-            DeviceEntity.setState(DeviceDTO.getState());
+            DeviceEntity deviceEntity = new DeviceEntity();
+            deviceEntity.setId(id);
+            deviceEntity.setName(deviceDTO.getName());
+            deviceEntity.setState(deviceDTO.getState());
 
-            return repository.save(DeviceEntity);
+            return repository.save(deviceEntity);
         });
     }
 

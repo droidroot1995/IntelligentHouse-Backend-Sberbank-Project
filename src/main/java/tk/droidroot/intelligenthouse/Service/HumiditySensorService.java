@@ -18,10 +18,10 @@ public class HumiditySensorService {
 
     public HumiditySensorDTO findById(Long id) {
         try {
-            HumiditySensorEntity HumiditySensor = repository.getOne(id);
+            HumiditySensorEntity humiditySensor = repository.getOne(id);
             HumiditySensorDTO dto = new HumiditySensorDTO();
-            dto.setId(HumiditySensor.getId());
-            dto.setName(HumiditySensor.getName());
+            dto.setId(humiditySensor.getId());
+            dto.setName(humiditySensor.getName());
 
             return dto;
         }
@@ -32,24 +32,24 @@ public class HumiditySensorService {
         return null;
     }
 
-    public HumiditySensorEntity create(HumiditySensorDTO HumiditySensorDTO){
-        HumiditySensorEntity HumiditySensorEntity = new HumiditySensorEntity();
-        HumiditySensorEntity.setName(HumiditySensorDTO.getName());
+    public HumiditySensorEntity create(HumiditySensorDTO humiditySensorDTO){
+        HumiditySensorEntity humiditySensorEntity = new HumiditySensorEntity();
+        humiditySensorEntity.setName(humiditySensorDTO.getName());
 
-        return repository.save(HumiditySensorEntity);
+        return repository.save(humiditySensorEntity);
     }
 
-    public HumiditySensorEntity update(HumiditySensorDTO HumiditySensorDTO, Long id){
-        return repository.findById(id).map(HumiditySensorEntity -> {
-            HumiditySensorEntity.setName(HumiditySensorDTO.getName());
+    public HumiditySensorEntity update(HumiditySensorDTO humiditySensorDTO, Long id){
+        return repository.findById(id).map(humiditySensorEntity -> {
+            humiditySensorEntity.setName(humiditySensorDTO.getName());
 
-            return repository.save(HumiditySensorEntity);
+            return repository.save(humiditySensorEntity);
         }).orElseGet(() -> {
-            HumiditySensorEntity HumiditySensorEntity = new HumiditySensorEntity();
-            HumiditySensorEntity.setId(id);
-            HumiditySensorEntity.setName(HumiditySensorDTO.getName());
+            HumiditySensorEntity humiditySensorEntity = new HumiditySensorEntity();
+            humiditySensorEntity.setId(id);
+            humiditySensorEntity.setName(humiditySensorDTO.getName());
 
-            return repository.save(HumiditySensorEntity);
+            return repository.save(humiditySensorEntity);
         });
     }
 

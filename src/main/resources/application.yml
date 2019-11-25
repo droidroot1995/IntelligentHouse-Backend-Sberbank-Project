@@ -1,0 +1,31 @@
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: group_id
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+app:
+  topic:
+    alarm: alarm
+    device: device
+    temperature_sensor: temperature_sensor
+    humidity_sensor: humidty_sensor
+    gas_sensor: gas_sensor
+    light_sensor: light_sensor
+    temperature_sensor_data: temperature_sensor_data
+    humidity_sensor_data: humidity_sensor_data
+    gas_sensor_data: gas_sensor_data
+    light_sensor_data: light_sensor_data
+
+
+logging:
+  level:
+    root: WARN
+    org.springframework.web: INFO
+    tk.droidroot: DEBUG

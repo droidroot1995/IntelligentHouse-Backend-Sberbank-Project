@@ -9,7 +9,9 @@ import javax.persistence.*;
 @Data
 public class TemperatureSensorDataEntity {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @SequenceGenerator(name = "hibernateSeq", sequenceName = "HIBERNATE_SEQUENCE_TSD")
+    @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "hibernateSeq")
+    //@GeneratedValue//(strategy=GenerationType.AUTO)
     private Long id;
 
     @ManyToOne

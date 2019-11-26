@@ -10,7 +10,9 @@ import java.util.List;
 @Data
 public class LightSensorEntity {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @SequenceGenerator(name = "hibernateSeq", sequenceName = "HIBERNATE_SEQUENCE_LS")
+    @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "hibernateSeq")
+    //@GeneratedValue//(strategy=GenerationType.AUTO)
     private Long id;
 
     @Column(name="name")

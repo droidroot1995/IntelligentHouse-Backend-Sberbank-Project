@@ -9,7 +9,9 @@ import javax.persistence.*;
 @Data
 public class GasSensorDataEntity {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @SequenceGenerator(name = "hibernateSeq", sequenceName = "HIBERNATE_SEQUENCE_GSD")
+    @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "hibernateSeq")
+    //@GeneratedValue//(strategy=GenerationType.AUTO)
     private Long id;
 
     @ManyToOne

@@ -10,7 +10,9 @@ import javax.persistence.*;
 public class AlarmEntity {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @SequenceGenerator(name = "hibernateSeq", sequenceName = "HIBERNATE_SEQUENCE_ALARM")
+    @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "hibernateSeq")
+    //@GeneratedValue//(strategy=GenerationType.AUTO)
     private Long id;
 
     @Column(name="name")

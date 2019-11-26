@@ -6,10 +6,14 @@
     <persistence-unit name="tk.droidroot.transactions.entity">
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL10Dialect"/>
+            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/postgres"/>
+            <property name="hibernate.connection.username" value="postgres"/>
+            <property name="hibernate.connection.password" value="root"/>
+            <!-- <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <property name="hibernate.connection.url" value="jdbc:h2L:database/test"/>
             <property name="hibernate.connection.username" value="droidroot"/>
-            <property name="hibernate.connection.password" value=""/>
+            <property name="hibernate.connection.password" value=""/> -->
             <!--            <property name="hibernate.connection.isolation" value="1"/>-->
             <!--            <property name="hibernate.connection.autocommit" value="true"/>-->
         </properties>

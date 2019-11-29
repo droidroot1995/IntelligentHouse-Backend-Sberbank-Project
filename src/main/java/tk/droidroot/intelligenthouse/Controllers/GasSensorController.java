@@ -6,11 +6,18 @@ import tk.droidroot.intelligenthouse.DTO.GasSensorDTO;
 import tk.droidroot.intelligenthouse.Models.GasSensorEntity;
 import tk.droidroot.intelligenthouse.Service.GasSensorService;
 
+import java.util.List;
+
 @RestController
 public class GasSensorController {
 
     @Autowired
     private GasSensorService service;
+
+    @GetMapping("/gsensor/all/")
+    public List<GasSensorDTO> getAll() {
+        return service.getAll();
+    }
 
     @GetMapping("/gsensor/{id}")
     public GasSensorDTO get(@PathVariable("id") Long id) {

@@ -8,6 +8,8 @@ import tk.droidroot.intelligenthouse.Models.LightSensorEntity;
 import tk.droidroot.intelligenthouse.Repositories.LightSensorRepository;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Transactional
 @Service
@@ -15,6 +17,27 @@ public class LightSensorService {
 
     @Autowired
     private LightSensorRepository repository;
+    
+    public List<LightSensorDTO> getAll() {
+        try {
+            List<LightSensorEntity> lse_lst = repository.findAll();
+            List<LightSensorDTO> ls_lst = new ArrayList<>();
+            for (LightSensorEntity tse: lse_lst) {
+                LightSensorDTO dto = new LightSensorDTO();
+                dto.setId(tse.getId());
+                dto.setName(tse.getName());
+                ls_lst.add(dto);
+            }
+
+            return ls_lst;
+        }
+        catch (EntityNotFoundException e) {
+            System.out.println("Table is empty");
+        }
+
+        return null;
+    }
+    
 
     public LightSensorDTO findById(Long id) {
         try {

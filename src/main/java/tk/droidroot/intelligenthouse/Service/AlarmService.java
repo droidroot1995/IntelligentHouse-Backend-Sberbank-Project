@@ -8,6 +8,8 @@ import tk.droidroot.intelligenthouse.Models.AlarmEntity;
 import tk.droidroot.intelligenthouse.Repositories.AlarmRepository;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Transactional
 @Service
@@ -15,6 +17,28 @@ public class AlarmService {
 
     @Autowired
     private AlarmRepository repository;
+
+    public List<AlarmDTO> getAll() {
+        try {
+            List<AlarmEntity> ae_lst = repository.findAll();
+            List<AlarmDTO> a_lst = new ArrayList<>();
+            for (AlarmEntity ae: ae_lst) {
+                AlarmDTO dto = new AlarmDTO();
+                dto.setId(ae.getId());
+                dto.setName(ae.getName());
+                dto.setTime(ae.getTime());
+                dto.setState(ae.getState());
+                a_lst.add(dto);
+            }
+
+            return a_lst;
+        }
+        catch (EntityNotFoundException e) {
+            System.out.println("Table is empty");
+        }
+
+        return null;
+    }
 
     public AlarmDTO findById(Long id) {
         try {

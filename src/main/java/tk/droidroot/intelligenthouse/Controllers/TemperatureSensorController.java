@@ -6,11 +6,18 @@ import tk.droidroot.intelligenthouse.DTO.TemperatureSensorDTO;
 import tk.droidroot.intelligenthouse.Models.TemperatureSensorEntity;
 import tk.droidroot.intelligenthouse.Service.TemperatureSensorService;
 
+import java.util.List;
+
 @RestController
 public class TemperatureSensorController {
 
     @Autowired
     private TemperatureSensorService service;
+
+    @GetMapping("/tsensor/all/")
+    public List<TemperatureSensorDTO> getAll() {
+        return service.getAll();
+    }
 
     @GetMapping("/tsensor/{id}")
     public TemperatureSensorDTO get(@PathVariable("id") Long id) {

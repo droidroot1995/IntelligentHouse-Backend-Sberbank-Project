@@ -6,11 +6,18 @@ import tk.droidroot.intelligenthouse.DTO.AlarmDTO;
 import tk.droidroot.intelligenthouse.Models.AlarmEntity;
 import tk.droidroot.intelligenthouse.Service.AlarmService;
 
+import java.util.List;
+
 @RestController
 public class AlarmController {
 
     @Autowired
     private AlarmService service;
+
+    @GetMapping("/alarm/all/")
+    public List<AlarmDTO> getAll() {
+        return service.getAll();
+    }
 
     @GetMapping("/alarm/{id}")
     public AlarmDTO get(@PathVariable("id") Long id) {

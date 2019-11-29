@@ -6,12 +6,19 @@ import tk.droidroot.intelligenthouse.DTO.LightSensorDTO;
 import tk.droidroot.intelligenthouse.Models.LightSensorEntity;
 import tk.droidroot.intelligenthouse.Service.LightSensorService;
 
+import java.util.List;
+
 
 @RestController
 public class LightSensorController {
 
     @Autowired
     private LightSensorService service;
+
+    @GetMapping("/lsensor/all/")
+    public List<LightSensorDTO> getAll() {
+        return service.getAll();
+    }
 
     @GetMapping("/lsensor/{id}")
     public LightSensorDTO get(@PathVariable("id") Long id) {

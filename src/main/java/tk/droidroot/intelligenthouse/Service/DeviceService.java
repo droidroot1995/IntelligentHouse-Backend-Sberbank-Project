@@ -8,6 +8,8 @@ import tk.droidroot.intelligenthouse.Models.DeviceEntity;
 import tk.droidroot.intelligenthouse.Repositories.DeviceRepository;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Transactional
 @Service
@@ -15,6 +17,27 @@ public class DeviceService {
 
     @Autowired
     private DeviceRepository repository;
+
+    public List<DeviceDTO> getAll() {
+        try {
+            List<DeviceEntity> de_lst = repository.findAll();
+            List<DeviceDTO> d_lst = new ArrayList<>();
+            for (DeviceEntity de: de_lst) {
+                DeviceDTO dto = new DeviceDTO();
+                dto.setId(de.getId());
+                dto.setName(de.getName());
+                dto.setState(de.getState());
+                d_lst.add(dto);
+            }
+
+            return d_lst;
+        }
+        catch (EntityNotFoundException e) {
+            System.out.println("Table is empty");
+        }
+
+        return null;
+    }
 
     public DeviceDTO findById(Long id) {
         try {

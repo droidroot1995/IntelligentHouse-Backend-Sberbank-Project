@@ -8,6 +8,8 @@ import tk.droidroot.intelligenthouse.Models.TemperatureSensorEntity;
 import tk.droidroot.intelligenthouse.Repositories.TemperatureSensorRepository;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Transactional
 @Service
@@ -15,6 +17,26 @@ public class TemperatureSensorService {
 
     @Autowired
     private TemperatureSensorRepository repository;
+
+    public List<TemperatureSensorDTO> getAll() {
+        try {
+            List<TemperatureSensorEntity> tse_lst = repository.findAll();
+            List<TemperatureSensorDTO> ts_lst = new ArrayList<>();
+            for (TemperatureSensorEntity tse: tse_lst) {
+                TemperatureSensorDTO dto = new TemperatureSensorDTO();
+                dto.setId(tse.getId());
+                dto.setName(tse.getName());
+                ts_lst.add(dto);
+            }
+
+            return ts_lst;
+        }
+        catch (EntityNotFoundException e) {
+            System.out.println("Table is empty");
+        }
+
+        return null;
+    }
 
     public TemperatureSensorDTO findById(Long id) {
         try {

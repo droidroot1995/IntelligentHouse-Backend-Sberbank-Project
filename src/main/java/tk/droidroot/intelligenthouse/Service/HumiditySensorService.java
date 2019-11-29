@@ -8,6 +8,8 @@ import tk.droidroot.intelligenthouse.Models.HumiditySensorEntity;
 import tk.droidroot.intelligenthouse.Repositories.HumiditySensorRepository;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Transactional
 @Service
@@ -15,6 +17,26 @@ public class HumiditySensorService {
 
     @Autowired
     private HumiditySensorRepository repository;
+
+    public List<HumiditySensorDTO> getAll() {
+        try {
+            List<HumiditySensorEntity> hse_lst = repository.findAll();
+            List<HumiditySensorDTO> hs_lst = new ArrayList<>();
+            for (HumiditySensorEntity hse: hse_lst) {
+                HumiditySensorDTO dto = new HumiditySensorDTO();
+                dto.setId(hse.getId());
+                dto.setName(hse.getName());
+                hs_lst.add(dto);
+            }
+
+            return hs_lst;
+        }
+        catch (EntityNotFoundException e) {
+            System.out.println("Table is empty");
+        }
+
+        return null;
+    }
 
     public HumiditySensorDTO findById(Long id) {
         try {

@@ -6,12 +6,19 @@ import tk.droidroot.intelligenthouse.DTO.HumiditySensorDTO;
 import tk.droidroot.intelligenthouse.Models.HumiditySensorEntity;
 import tk.droidroot.intelligenthouse.Service.HumiditySensorService;
 
+import java.util.List;
+
 
 @RestController
 public class HumiditySensorController {
 
     @Autowired
     private HumiditySensorService service;
+
+    @GetMapping("/hsensor/all/")
+    public List<HumiditySensorDTO> getAll() {
+        return service.getAll();
+    }
 
     @GetMapping("/hsensor/{id}")
     public HumiditySensorDTO get(@PathVariable("id") Long id) {

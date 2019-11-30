@@ -9,6 +9,7 @@ import tk.droidroot.intelligenthouse.Repositories.HumiditySensorDataRepository;
 import tk.droidroot.intelligenthouse.Repositories.HumiditySensorRepository;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 @Transactional
 @Service
@@ -31,6 +32,35 @@ public class HumiditySensorDataService {
 
             return dto;
         }
+        catch(EntityNotFoundException e){
+            System.out.println("Entity not found");
+        }
+
+        return null;
+    }
+
+    public HumiditySensorDataDTO findLastBySensorId(Long id) {
+        try {
+            List<HumiditySensorDataEntity> tsde_list = repository.findAllByHumiditySensorId(id);
+            HumiditySensorDataDTO dto = new HumiditySensorDataDTO();
+
+            if(tsde_list.size() > 0) {
+                HumiditySensorDataEntity tsde = tsde_list.get(tsde_list.size() - 1);
+                dto.setId(tsde.getId());
+                dto.setHumiditySensor(tsde.getHumiditySensor().getId());
+                dto.setData(tsde.getData());
+                dto.setDate(tsde.getDate());
+            }
+            else {
+                dto.setId((long)0);
+                dto.setHumiditySensor(id);
+                dto.setData(0.0);
+                dto.setDate("-");
+            }
+
+            return dto;
+        }
+
         catch(EntityNotFoundException e){
             System.out.println("Entity not found");
         }

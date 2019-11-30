@@ -17,6 +17,11 @@ public class TemperatureSensorDataController {
         return service.findById(id);
     }
 
+    @GetMapping("/tsensordata/last/{sensorId}")
+    public TemperatureSensorDataDTO getLast(@PathVariable("sensorId") Long id) {
+        return service.findLastBySensorId(id);
+    }
+
     @PostMapping("/tsensordata/create/")
     public TemperatureSensorDataEntity create(@RequestBody TemperatureSensorDataDTO dto) {
         return service.create(dto);

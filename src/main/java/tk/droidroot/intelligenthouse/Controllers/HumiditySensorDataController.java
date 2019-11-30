@@ -18,6 +18,11 @@ public class HumiditySensorDataController {
         return service.findById(id);
     }
 
+    @GetMapping("/hsensordata/last/{sensorId}")
+    public HumiditySensorDataDTO getLast(@PathVariable("sensorId") Long id) {
+        return service.findLastBySensorId(id);
+    }
+
     @PostMapping("/hsensordata/create/")
     public HumiditySensorDataEntity create(@RequestBody HumiditySensorDataDTO dto) {
         return service.create(dto);

@@ -9,6 +9,7 @@ import tk.droidroot.intelligenthouse.Repositories.LightSensorDataRepository;
 import tk.droidroot.intelligenthouse.Repositories.LightSensorRepository;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 @Transactional
 @Service
@@ -31,6 +32,35 @@ public class LightSensorDataService {
 
             return dto;
         }
+        catch(EntityNotFoundException e){
+            System.out.println("Entity not found");
+        }
+
+        return null;
+    }
+
+    public LightSensorDataDTO findLastBySensorId(Long id) {
+        try {
+            List<LightSensorDataEntity> tsde_list = repository.findAllByLightSensorId(id);
+            LightSensorDataDTO dto = new LightSensorDataDTO();
+
+            if(tsde_list.size() > 0) {
+                LightSensorDataEntity tsde = tsde_list.get(tsde_list.size() - 1);
+                dto.setId(tsde.getId());
+                dto.setLightSensor(tsde.getLightSensor().getId());
+                dto.setData(tsde.getData());
+                dto.setDate(tsde.getDate());
+            }
+            else {
+                dto.setId((long)0);
+                dto.setLightSensor(id);
+                dto.setData(0.0);
+                dto.setDate("-");
+            }
+
+            return dto;
+        }
+
         catch(EntityNotFoundException e){
             System.out.println("Entity not found");
         }

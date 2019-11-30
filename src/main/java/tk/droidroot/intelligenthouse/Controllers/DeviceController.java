@@ -25,16 +25,19 @@ public class DeviceController {
     }
 
     @PostMapping("/device/create/")
+    @CrossOrigin
     public DeviceEntity create(@RequestBody DeviceDTO dto) {
         return service.create(dto);
     }
 
     @PutMapping("/device/update/{id}")
+    @CrossOrigin
     public DeviceEntity update(@RequestBody DeviceDTO dto, @PathVariable("id") Long id){
         return service.update(dto, id);
     }
 
     @DeleteMapping("/device/delete/{id}")
+    @CrossOrigin
     public void delete(@PathVariable("id") Long id){
         service.delete(id);
     }

@@ -17,6 +17,11 @@ public class GasSensorDataController {
         return service.findById(id);
     }
 
+    @GetMapping("/gsensordata/last/{sensorId}")
+    public GasSensorDataDTO getLast(@PathVariable("sensorId") Long id) {
+        return service.findLastBySensorId(id);
+    }
+
     @PostMapping("/gsensordata/create/")
     public GasSensorDataEntity create(@RequestBody GasSensorDataDTO dto) {
         return service.create(dto);

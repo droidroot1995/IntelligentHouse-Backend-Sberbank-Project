@@ -17,6 +17,11 @@ public class LightSensorDataController {
         return service.findById(id);
     }
 
+    @GetMapping("/lsensordata/last/{sensorId}")
+    public LightSensorDataDTO getLast(@PathVariable("sensorId") Long id) {
+        return service.findLastBySensorId(id);
+    }
+
     @PostMapping("/lsensordata/create/")
     public LightSensorDataEntity create(@RequestBody LightSensorDataDTO dto) {
         return service.create(dto);

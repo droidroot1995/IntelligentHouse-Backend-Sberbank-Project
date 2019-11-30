@@ -9,6 +9,7 @@ import tk.droidroot.intelligenthouse.Repositories.GasSensorDataRepository;
 import tk.droidroot.intelligenthouse.Repositories.GasSensorRepository;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 @Transactional
 @Service
@@ -31,6 +32,35 @@ public class GasSensorDataService {
 
             return dto;
         }
+        catch(EntityNotFoundException e){
+            System.out.println("Entity not found");
+        }
+
+        return null;
+    }
+
+    public GasSensorDataDTO findLastBySensorId(Long id) {
+        try {
+            List<GasSensorDataEntity> tsde_list = repository.findAllByGasSensorId(id);
+            GasSensorDataDTO dto = new GasSensorDataDTO();
+
+            if(tsde_list.size() > 0) {
+                GasSensorDataEntity tsde = tsde_list.get(tsde_list.size() - 1);
+                dto.setId(tsde.getId());
+                dto.setGasSensor(tsde.getGasSensor().getId());
+                dto.setData(tsde.getData());
+                dto.setDate(tsde.getDate());
+            }
+            else {
+                dto.setId((long)0);
+                dto.setGasSensor(id);
+                dto.setData(0.0);
+                dto.setDate("-");
+            }
+
+            return dto;
+        }
+
         catch(EntityNotFoundException e){
             System.out.println("Entity not found");
         }

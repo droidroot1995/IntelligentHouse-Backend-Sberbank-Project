@@ -25,16 +25,19 @@ public class AlarmController {
     }
 
     @PostMapping("/alarm/create/")
+    @CrossOrigin
     public AlarmEntity create(@RequestBody AlarmDTO dto) {
         return service.create(dto);
     }
 
     @PutMapping("/alarm/update/{id}")
+    @CrossOrigin
     public AlarmEntity update(@RequestBody AlarmDTO dto, @PathVariable("id") Long id){
         return service.update(dto, id);
     }
 
     @DeleteMapping("/alarm/delete/{id}")
+    @CrossOrigin
     public void delete(@PathVariable("id") Long id){
         service.delete(id);
     }
